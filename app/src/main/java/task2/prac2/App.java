@@ -3,15 +3,42 @@
  */
 package task2.prac2;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
         XmlReader reader = new XmlReader();
         Document document = reader.readXmlFile("data.xml");
         // do something with the document object
+
+        Element root = document.getDocumentElement();
+        System.out.println("Root element: " + root.getNodeName());
+
+        NodeList nodeList = root.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element element = (Element) node;
+                String name = element.getElementsByTagName("name").item(0).getTextContent();
+                String postalZip = element.getElementsByTagName("postalZip").item(0).getTextContent();
+                String region = element.getElementsByTagName("region").item(0).getTextContent();
+                String country = element.getElementsByTagName("country").item(0).getTextContent();
+                String address = element.getElementsByTagName("address").item(0).getTextContent();
+                String list = element.getElementsByTagName("list").item(0).getTextContent();
+                System.out.println("Name: " + name);
+                System.out.println("Postal Zip: " + postalZip);
+                System.out.println("Region: " + region);
+                System.out.println("Country: " + country);
+                System.out.println("Address: " + address);
+                System.out.println("List: " + list);
+            }
+        }
 
     }
 }
