@@ -9,6 +9,9 @@ public class App {
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        XmlReader reader = new XmlReader();
+        Document document = reader.readXmlFile("data.xml");
+        // do something with the document object
+
     }
 }
